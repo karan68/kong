@@ -25,7 +25,7 @@ local fixtures = {
 }
 
 
-describe("upstream keepalive", function()
+describe("#db upstream keepalive", function()
   local proxy_client
 
   local function start_kong(opts)
