@@ -460,6 +460,7 @@ for _, strategy in helpers.each_strategy() do
             ]], entity_name))
             assert.is_nil(err)
             assert.is_table(res)
+            print(require("inspect")(res))
             assert.equal(3, #res)
 
             local evts = {}
