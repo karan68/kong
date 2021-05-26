@@ -47,7 +47,7 @@ jobs:
 
     - name: Install packages
       if: steps.cache-deps.outputs.cache-hit != 'true'
-      run: sudo apt update && sudo apt install libyaml-dev valgrind-dev
+      run: sudo apt update && sudo apt install libyaml-dev valgrind
 
     - name: Build Kong dependencies
       if: steps.cache-deps.outputs.cache-hit != 'true'
@@ -62,13 +62,13 @@ jobs:
 
     env:
       KONG_TEST_PG_DATABASE: kong
-      KONG_TEST_PG_USER: postgres
+      KONG_TEST_PG_USER: kong
 
     services:
       postgres:
-        image: postgres:10
+        image: postgres:13
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: kong
           POSTGRES_DB: kong
           POSTGRES_HOST_AUTH_METHOD: trust
         ports:
@@ -136,7 +136,7 @@ jobs:
 
     env:
       KONG_TEST_PG_DATABASE: kong
-      KONG_TEST_PG_USER: postgres
+      KONG_TEST_PG_USER: kong
       KONG_TEST_DATABASE: postgres
       TEST_SUITE: ${{ matrix.suite }}
       TEST_SPLIT: ${{ matrix.split }}
@@ -145,7 +145,7 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: kong
           POSTGRES_DB: kong
           POSTGRES_HOST_AUTH_METHOD: trust
         ports:
@@ -202,7 +202,7 @@ jobs:
 
     env:
       KONG_TEST_PG_DATABASE: kong
-      KONG_TEST_PG_USER: postgres
+      KONG_TEST_PG_USER: kong
       KONG_TEST_DATABASE: 'off'
       TEST_SUITE: dbless
 
